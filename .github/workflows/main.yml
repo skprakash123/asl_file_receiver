@@ -79,7 +79,7 @@ jobs:
     - name: Publish
       run: |-
          echo '${{ secrets.GCP_CREDENTIALS }}' > gcp-credentials.json
-         docker login -u _json_key --password-stdin https://GAR_LOCATION-docker.pkg.dev < gcp-credentials.json
+         docker login -u _json_key --password-stdin https://$GAR_LOCATION-docker.pkg.dev < gcp-credentials.json
          docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
     # Set up kustomize
     - name: Set up Kustomize
