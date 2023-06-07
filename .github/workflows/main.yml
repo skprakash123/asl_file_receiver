@@ -56,7 +56,7 @@ jobs:
 
     - name: Docker configuration
       run: |-
-        echo ${{secrets.GCP_CREDENTIALS}} | docker login -u ${{secrets.docker_user}} --password ${{secrets.docker_pass}} 
+        echo ${{secrets.GCP_CREDENTIALS}} | docker login -u ${{secrets.GCP_CREDENTIALS}} --password-stdin https://europe-north1-docker.pkg.dev
     # Get the GKE credentials so we can deploy to the cluster
     - name: Set up GKE credentials
       uses: google-github-actions/get-gke-credentials@v0
