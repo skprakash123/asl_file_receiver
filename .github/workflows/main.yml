@@ -17,7 +17,7 @@ on:
     branches: [ "main" ]
 
 env:
-  PROJECT_ID: ${{ SECRETS_GKE_PROJECT }}
+  SECRETS_GKE_PROJECT: ${{ SECRETS_GKE_PROJECT }}
   GAR_LOCATION: europe-north1 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: cluster-1    # TODO: update to cluster name
   GKE_ZONE: europe-north1-a   # TODO: update to cluster zone
