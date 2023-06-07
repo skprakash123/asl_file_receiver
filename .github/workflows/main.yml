@@ -82,7 +82,7 @@ jobs:
          docker login -u _json_key --password-stdin https://$GAR_LOCATION-docker.pkg.dev < gcp-credentials.json
          docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
     # Set up kustomize
-    - name: Set up Kustomize
+    - name: Set up Kubectl
       run: |-
         curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
         chmod +x kubectl
@@ -93,6 +93,5 @@ jobs:
         # replacing the image name in the k8s template
         sed -i "s|LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG|$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$BUILD_NUMBER|g" deployment.yaml
         kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
